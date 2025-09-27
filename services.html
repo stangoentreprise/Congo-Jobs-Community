@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Services — Congo Jobs Community</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white border-b shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-3">
+        <img src="logo.png" alt="Logo Congo Jobs" class="h-10 w-10 object-contain">
+        <div>
+          <div class="font-bold text-lg">Congo Jobs Community</div>
+          <div class="text-xs text-gray-500">Prestataires locaux & services</div>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="index.html" class="text-gray-700 hover:text-yellow-600">Accueil</a>
+        <a href="services.html" class="text-gray-700 hover:text-yellow-600">Services</a>
+        <a href="post.html" class="text-gray-700 hover:text-yellow-600">Publier</a>
+        <a href="about.html" class="text-gray-700 hover:text-yellow-600">À propos</a>
+        <a href="contact.html" class="text-gray-700 hover:text-yellow-600">Contact</a>
+      </div>
+
+      <div class="md:hidden">
+        <button aria-label="menu" onclick="toggleMenu()" class="p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <nav id="menu" class="md:hidden bg-white border-t overflow-hidden" aria-hidden="true">
+      <div class="px-4 py-3 space-y-2 menu-inner">
+        <a href="index.html" class="block">Accueil</a>
+        <a href="services.html" class="block">Services</a>
+        <a href="post.html" class="block">Publier</a>
+        <a href="about.html" class="block">À propos</a>
+        <a href="contact.html" class="block">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+    <section class="bg-cover bg-center" style="background-image: url('image_fond.png')">
+      <div class="bg-black bg-opacity-40">
+        <div class="container mx-auto px-4 py-16 text-white text-center">
+          <h1 class="text-3xl font-extrabold">Services</h1>
+          <p class="mt-2 text-gray-200">Recherchez les prestataires par nom et département.</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+      <h2 class="text-2xl font-bold mb-4">Résultats de recherche</h2>
+
+  <div class="bg-white p-4 rounded shadow mb-6 relative z-10">
+        <div class="grid md:grid-cols-3 gap-4 items-center">
+          <div class="md:col-span-2">
+            <label class="block text-sm text-gray-700">Rechercher par nom</label>
+            <input id="searchInput" type="search" placeholder="Tapez le nom du service..." class="w-full p-2 border rounded mt-1 text-gray-900" style="background:white;color:#000;position:relative;z-index:50;pointer-events:auto;" />
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Département</label>
+              <select id="departmentSelect" class="w-full p-2 border rounded mt-1 text-gray-900" style="appearance:auto;-webkit-appearance:menulist-button;background:white;color:#000;position:relative;z-index:50;pointer-events:auto;cursor:pointer;">
+                <option value="">Tous les départements</option>
+                <option value="brazzaville">Brazzaville</option>
+                <option value="pointe-noire">Pointe-Noire</option>
+                <option value="bouenza">Bouenza</option>
+                <option value="cuvette">Cuvette</option>
+                <option value="cuvette-ouest">Cuvette-Ouest</option>
+                <option value="kouilou">Kouilou</option>
+                <option value="lekoumou">Lékoumou</option>
+                <option value="likouala">Likouala</option>
+                <option value="niari">Niari</option>
+                <option value="plateaux">Plateaux</option>
+                <option value="pool">Pool</option>
+                <option value="sangha">Sangha</option>
+              </select>
+          </div>
+        </div>
+      </div>
+
+        <div class="flex items-center justify-between mb-4">
+          <div id="resultCount">&nbsp;</div>
+          <div><a href="post.html" class="text-yellow-600">Publier une annonce</a></div>
+        </div>
+
+      <div id="results" class="grid md:grid-cols-3 gap-6" aria-live="polite">
+        <!-- Les résultats seront injectés ici par JS -->
+      </div>
+    </main>
+
+    <!-- Contact modal -->
+    <div id="contactModal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50">
+      <div class="bg-white rounded p-4 max-w-sm w-full">
+        <h3 class="font-bold mb-2">Contact du prestataire</h3>
+        <p id="contactInfo" class="text-gray-700"></p>
+        <div class="mt-4 text-right">
+          <button onclick="closeModal()" class="px-3 py-1 bg-gray-200 rounded">Fermer</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Services par défaut (vide/placeholder) — l'utilisateur pourra ajouter via post.html
+      const defaultServices = [];
+
+      // Récupère services depuis localStorage
+      function loadSavedServices(){
+        try{
+          const raw = localStorage.getItem('congo_services');
+          if(!raw) return [];
+          return JSON.parse(raw);
+        }catch(e){ return [] }
+      }
+
+      function saveServiceToLocal(s){
+        const arr = loadSavedServices();
+        arr.unshift(s); // newest first
+        localStorage.setItem('congo_services', JSON.stringify(arr));
+      }
+
+      // Lecture des params GET
+      function getParams(){
+        const p = new URLSearchParams(window.location.search);
+        return { q: (p.get('q')||'').trim().toLowerCase(), department: (p.get('department')||'').toLowerCase() };
+      }
+
+      // matches: recherche par nom (title) uniquement
+      function matches(service, q, department){
+        if(q){
+          const inTitle = (service.title||'').toLowerCase().includes(q);
+          if(!inTitle) return false;
+        }
+        if(department){
+          if(!service.department) return false;
+          if(service.department.toLowerCase() !== department) return false;
+        }
+        return true;
+      }
+
+      function renderCard(s){
+        const div = document.createElement('article');
+        div.className = 'bg-white rounded shadow overflow-hidden';
+        div.innerHTML = `
+          ${s.image? `<img src="${s.image}" alt="${escapeHtml(s.title)}" class="w-full h-40 object-cover">` : ''}
+          <div class="p-4">
+            <h3 class="font-bold">${escapeHtml(s.title)}</h3>
+            <p class="text-sm text-gray-600 mt-1">${escapeHtml(s.description)}</p>
+            <div class="mt-4 flex items-center justify-between">
+              <div class="text-yellow-600 font-bold">${s.price? escapeHtml(s.price) : ''}</div>
+              <div>
+                <button onclick="openContact('${escapeJs(s.contact||'')}', '${escapeJs(s.title)}')" class="text-sm text-gray-700 mr-2">Voir le contact</button>
+              </div>
+            </div>
+          </div>`;
+        return div;
+      }
+
+      function escapeHtml(str){
+        if(!str) return '';
+        return String(str).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c] });
+      }
+      function escapeJs(str){ return (str||'').replace(/'/g,"\\'") }
+
+      function openContact(contact, title){
+        const modal = document.getElementById('contactModal');
+        const info = document.getElementById('contactInfo');
+        info.innerHTML = `<strong>${escapeHtml(title)}</strong><br>${escapeHtml(contact)}`;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+      function closeModal(){
+        const modal = document.getElementById('contactModal');
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      }
+
+      // fermer modal au clic extérieur et à Échap
+      (function(){
+        const modal = document.getElementById('contactModal');
+        modal.addEventListener('click', function(e){
+          if(e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+      })();
+
+      // rendering helper
+      function renderResults(services){
+        const results = document.getElementById('results');
+        if(!results) return;
+        const countEl = document.getElementById('resultCount');
+        if(services.length === 0){
+          if(countEl) countEl.textContent = '0 résultats';
+          results.innerHTML = '<div class="bg-white p-6 rounded shadow col-span-3 text-gray-600">Aucun service trouvé. Vous pouvez publier un service depuis la page "Publier".</div>';
+          return;
+        }
+        if(countEl) countEl.textContent = services.length + (services.length > 1 ? ' résultats' : ' résultat');
+        results.innerHTML = '';
+        services.forEach(s => results.appendChild(renderCard(s)));
+      }
+
+      // Live filter using input + select; update URL params without reload
+      document.addEventListener('DOMContentLoaded', function(){
+        const input = document.getElementById('searchInput');
+        const sel = document.getElementById('departmentSelect');
+        const services = defaultServices.concat(loadSavedServices());
+
+        // initialize from URL
+        const params = getParams();
+        if(input && params.q) input.value = params.q;
+        if(sel && params.department) sel.value = params.department;
+
+        function applyFilterAndRender(){
+          const q = (input && input.value || '').trim().toLowerCase();
+          const department = (sel && sel.value || '').toLowerCase();
+          const filtered = services.filter(s => matches(s, q, department));
+          renderResults(filtered);
+          // update URL params (shallow, no reload)
+          const up = new URLSearchParams();
+          if(q) up.set('q', q);
+          if(department) up.set('department', department);
+          const newUrl = window.location.pathname + (up.toString() ? ('?' + up.toString()) : '');
+          history.replaceState(null, '', newUrl);
+        }
+
+        // debounce helper
+        function debounce(fn, wait){
+          let t;
+          return function(...args){
+            clearTimeout(t);
+            t = setTimeout(()=> fn.apply(this, args), wait);
+          }
+        }
+
+        if(input){ input.addEventListener('input', debounce(applyFilterAndRender, 200)); }
+        if(sel){ sel.addEventListener('change', applyFilterAndRender); }
+
+        // first render
+        applyFilterAndRender();
+      });
+    </script>
+
+  <!-- Footer (centralisé et pro) -->
+  <footer class="bg-white border-t mt-8">
+    <div class="container mx-auto px-4 py-8 text-center">
+      <img src="logo.png" alt="logo" class="h-10 mx-auto mb-3">
+      <p class="text-gray-700 text-sm mb-4">© Congo Jobs Community — Plateforme locale pour l'emploi et les services.</p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-4">
+        <a href="services.html" class="text-gray-700 hover:text-yellow-600">Services</a>
+        <a href="post.html" class="text-gray-700 hover:text-yellow-600">Publier une annonce</a>
+        <a href="about.html" class="text-gray-700 hover:text-yellow-600">À propos</a>
+        <a href="contact.html" class="text-gray-700 hover:text-yellow-600">Contact</a>
+      </div>
+
+  <p class="text-sm text-gray-600 mb-1">contact@congojobscommunity.local</p>
+      <p class="text-sm text-gray-600">Brazzaville, Congo Brazzaville</p>
+    </div>
+  </footer>
+
+  <script>
+    // menu mobile animé: on joue sur la hauteur maximale et l'opacité
+    function toggleMenu(){
+      const m = document.getElementById('menu');
+      if(!m) return;
+      const open = m.classList.toggle('open');
+      m.setAttribute('aria-hidden', String(!open));
+      if(open){ const first = m.querySelector('a'); if(first) first.focus(); }
+    }
+    // fermer menu au clic extérieur / Échap
+    (function(){
+      const menu = document.getElementById('menu');
+      if(!menu) return;
+      document.addEventListener('click', function(e){ const t = e.target; if(!menu.classList.contains('open')) return; if(t.closest('#menu')) return; if(t.closest('button[aria-label="menu"]')) return; menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); });
+      document.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } });
+    })();
+  </script>
+</body>
+</html>

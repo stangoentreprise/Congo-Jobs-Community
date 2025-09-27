@@ -1,0 +1,52 @@
+/* styles.css - petites customisations + conteneur utilitaire */
+.container{ max-width:1100px; margin-left:auto; margin-right:auto }
+body{ color: #1f2937 }
+a{ color: #374151 }
+a:hover{ color: #b45309 }
+
+/* Responsive helper */
+@media (min-width:768px){
+  .md\:hidden{ display:none }
+}
+
+/* Mobile menu animation */
+#menu{ transition: max-height 300ms ease, opacity 200ms ease; max-height:0; opacity:0 }
+#menu.open{ max-height:400px; opacity:1 }
+#menu .menu-inner a{ display:block; padding:8px 0; border-bottom:1px solid #f3f4f6 }
+
+/* petites améliorations visuelles */
+.bg-yellow-500{ background-color:#F59E0B }
+.text-yellow-600{ color:#D97706 }
+
+/* Card hover effect for pro look */
+.card-raise{ transition: transform 180ms ease, box-shadow 180ms ease }
+.card-raise:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(15,23,42,0.12) }
+
+/* Focus styles for accessibility */
+input:focus, select:focus, button:focus, a:focus{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.12); /* subtle indigo ring */
+  border-color: rgba(99,102,241,0.6);
+}
+
+/* Result counter */
+#resultCount{ font-size:0.95rem; color:#374151 }
+
+/* Ensure results grid stacks nicely on small screens */
+@media (max-width: 767px){
+  #results{ grid-template-columns: 1fr !important }
+}
+
+/* Placeholder color (ensure visible but subtle) */
+::placeholder { color: #9CA3AF; opacity: 1; }
+::-webkit-input-placeholder { color: #9CA3AF; }
+:-ms-input-placeholder { color: #9CA3AF; }
+::-ms-input-placeholder { color: #9CA3AF; }
+::-moz-placeholder { color: #9CA3AF; opacity: 1; }
+
+/* Modal */
+#contactModal{ z-index:60 }
+#contactModal .bg-white{ box-shadow: 0 10px 25px rgba(0,0,0,0.2) }
+/* Toast */
+#toast{ transition: opacity 200ms ease; opacity:1 }
+#toast.hidden{ opacity:0 }

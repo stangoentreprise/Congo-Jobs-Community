@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>À propos — Congo Jobs Community</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white border-b shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-3">
+        <img src="logo.png" alt="Logo Congo Jobs" class="h-10 w-10 object-contain">
+        <div>
+          <div class="font-bold text-lg">Congo Jobs Community</div>
+          <div class="text-xs text-gray-500">Prestataires locaux & services</div>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="index.html" class="text-gray-700 hover:text-yellow-600">Accueil</a>
+        <a href="services.html" class="text-gray-700 hover:text-yellow-600">Services</a>
+        <a href="post.html" class="text-gray-700 hover:text-yellow-600">Publier</a>
+        <a href="about.html" class="text-gray-700 hover:text-yellow-600">À propos</a>
+        <a href="contact.html" class="text-gray-700 hover:text-yellow-600">Contact</a>
+      </div>
+
+      <div class="md:hidden">
+        <button aria-label="menu" onclick="toggleMenu()" class="p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <nav id="menu" class="md:hidden bg-white border-t overflow-hidden" aria-hidden="true">
+      <div class="px-4 py-3 space-y-2 menu-inner">
+        <a href="index.html" class="block">Accueil</a>
+        <a href="services.html" class="block">Services</a>
+        <a href="post.html" class="block">Publier</a>
+        <a href="about.html" class="block">À propos</a>
+        <a href="contact.html" class="block">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="bg-cover bg-center" style="background-image: url('image_fond.png')">
+    <div class="bg-black bg-opacity-40">
+      <div class="container mx-auto px-4 py-16 text-white text-center">
+        <h1 class="text-3xl font-extrabold">Notre mission</h1>
+        <p class="mt-2 text-gray-200">Soutenir l'économie locale du Congo Brazzaville en rapprochant clients et prestataires.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-4 py-12">
+    <div class="max-w-3xl mx-auto text-center">
+  <h2 class="text-3xl md:text-4xl font-extrabold mb-4">À propos de Congo Jobs Community</h2>
+  <p class="text-gray-700 text-lg mb-8">Congo Jobs Community met en relation les personnes et les prestataires de confiance au Congo Brazzaville — artisans, techniciens, freelances et petites entreprises locales. Notre mission est simple : faciliter la recherche de services, accélérer les mises en relation et soutenir l'activité économique locale.</p>
+
+      <!-- Feature cards -->
+      <div class="mt-8 grid gap-6 md:grid-cols-3 text-left">
+        <div class="bg-white p-6 rounded-lg shadow-sm card-raise">
+          <div class="h-1 w-14 rounded-full mb-3" style="background:#F59E0B"></div>
+          <h3 class="font-bold mb-2">Simple & rapide</h3>
+          <p class="text-sm text-gray-600">Publiez ou trouvez un service en quelques clics, sans complications.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-sm card-raise">
+          <div class="h-1 w-14 rounded-full mb-3" style="background:#10B981"></div>
+          <h3 class="font-bold mb-2">Prestataires locaux</h3>
+          <p class="text-sm text-gray-600">Des prestataires proches de vous pour réduire les délais et les coûts.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-sm card-raise">
+          <div class="h-1 w-14 rounded-full mb-3" style="background:#6366F1"></div>
+          <h3 class="font-bold mb-2">Confiance & transparence</h3>
+          <p class="text-sm text-gray-600">Descriptions claires, prix affichés et contact direct entre client et prestataire.</p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="mt-10 grid grid-cols-3 gap-4 text-center">
+        <div>
+          <div id="stat-prestataires" class="text-2xl font-bold">—</div>
+          <div class="text-sm text-gray-600">Prestataires</div>
+        </div>
+        <div>
+          <div id="stat-annonces" class="text-2xl font-bold">—</div>
+          <div class="text-sm text-gray-600">Annonces</div>
+        </div>
+        <div>
+          <div id="stat-villes" class="text-2xl font-bold">12</div>
+          <div class="text-sm text-gray-600">Villes couvertes</div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-10">
+        <a href="contact.html" class="inline-block bg-yellow-600 text-white px-6 py-3 rounded-md hover:bg-yellow-700">Nous contacter</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer (centralisé et pro) -->
+  <footer class="bg-white border-t mt-12">
+    <div class="container mx-auto px-4 py-8 text-center">
+      <img src="logo.png" alt="logo" class="h-10 mx-auto mb-3">
+      <p class="text-gray-700 text-sm mb-4">© Congo Jobs Community — Plateforme locale pour l'emploi et les services.</p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-4">
+        <a href="services.html" class="text-gray-700 hover:text-yellow-600">Services</a>
+        <a href="post.html" class="text-gray-700 hover:text-yellow-600">Publier une annonce</a>
+        <a href="about.html" class="text-gray-700 hover:text-yellow-600">À propos</a>
+        <a href="contact.html" class="text-gray-700 hover:text-yellow-600">Contact</a>
+      </div>
+
+      <p class="text-sm text-gray-600 mb-1">contact@congojobscommunity.local</p>
+      <p class="text-sm text-gray-600">Brazzaville, Congo Brazzaville</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){ const m = document.getElementById('menu'); if(!m) return; const open = m.classList.toggle('open'); m.setAttribute('aria-hidden', String(!open)); if(open){ const first = m.querySelector('a'); if(first) first.focus(); } }
+    (function(){ const menu = document.getElementById('menu'); if(!menu) return; document.addEventListener('click', function(e){ const t=e.target; if(!menu.classList.contains('open')) return; if(t.closest('#menu')) return; if(t.closest('button[aria-label="menu"]')) return; menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); }); document.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } }); })();
+  </script>
+  <script>
+    // Compute statistics from localStorage (key: congo_services)
+    (function(){
+      try{
+        const raw = localStorage.getItem('congo_services');
+        const services = raw ? JSON.parse(raw) : [];
+        if(!Array.isArray(services)) throw new Error('bad-format');
+
+        // Annonces = total services
+        const annonces = services.length;
+
+        // Prestataires = count of unique contact identifiers (phone or email)
+        const contacts = new Set();
+        services.forEach(s => {
+          if(s.contact) contacts.add(s.contact.trim());
+          else if(s.phone) contacts.add(String(s.phone).trim());
+        });
+
+        const prestataires = contacts.size || annonces; // fallback
+
+        const elA = document.getElementById('stat-annonces');
+        const elP = document.getElementById('stat-prestataires');
+        if(elA) elA.textContent = annonces > 0 ? String(annonces) : '0';
+        if(elP) elP.textContent = prestataires > 0 ? String(prestataires) : '0';
+      }catch(e){
+        // on erreur, afficher 0
+        const elA = document.getElementById('stat-annonces');
+        const elP = document.getElementById('stat-prestataires');
+        if(elA) elA.textContent = '0';
+        if(elP) elP.textContent = '0';
+        console.warn('Impossible de calculer les statistiques:', e);
+      }
+    })();
+  </script>
+</body>
+</html>

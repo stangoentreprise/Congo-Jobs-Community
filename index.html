@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Congo Jobs Community — Trouvez & publiez des services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Congo Jobs Community — Plateforme locale pour trouver des prestataires et publier des services au Congo Brazzaville. Inscription, profils, dashboard et contact.">
+  <meta property="og:title" content="Congo Jobs Community">
+  <meta property="og:description" content="Trouvez des prestataires locaux et publiez vos services. Simple, rapide et local.">
+  <link rel="icon" href="logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* small fallback in-case styles.css not loaded */
+    body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white border-b shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-3">
+        <img src="logo.png" alt="Logo Congo Jobs" class="h-10 w-10 object-contain">
+        <div>
+          <div class="font-bold text-lg">Congo Jobs Community</div>
+          <div class="text-xs text-gray-500">Prestataires locaux & services</div>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="index.html" class="text-gray-700 hover:text-yellow-600">Accueil</a>
+        <a href="services.html" class="text-gray-700 hover:text-yellow-600">Services</a>
+        <a href="post.html" class="text-gray-700 hover:text-yellow-600">Publier</a>
+        <a href="about.html" class="text-gray-700 hover:text-yellow-600">À propos</a>
+        <a href="contact.html" class="text-gray-700 hover:text-yellow-600">Contact</a>
+      </div>
+
+      <div class="md:hidden">
+        <button aria-label="menu" onclick="toggleMenu()" class="p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <nav id="menu" class="md:hidden bg-white border-t overflow-hidden" aria-hidden="true">
+      <div class="px-4 py-3 space-y-2 menu-inner">
+        <a href="index.html" class="block">Accueil</a>
+        <a href="services.html" class="block">Services</a>
+        <a href="post.html" class="block">Publier</a>
+        <a href="about.html" class="block">À propos</a>
+        <a href="contact.html" class="block">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main class="flex-1">
+    <section class="bg-cover bg-center" style="background-image: url('image_fond.png')">
+      <div class="bg-black bg-opacity-40">
+        <div class="container mx-auto px-4 py-20 text-white text-center">
+          <h1 class="text-3xl md:text-5xl font-extrabold">Trouver un prestataire fiable au Congo</h1>
+          <p class="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">Recherchez, comparez et contactez des professionnels locaux — service, construction, informatique, événements et plus.</p>
+
+          <div class="mt-8 max-w-3xl mx-auto">
+            <form action="services.html" method="get" class="bg-white p-4 rounded shadow-sm flex flex-col md:flex-row gap-3">
+              <input name="q" type="search" placeholder="Nom du service, ex: électricien" class="flex-1 p-3 border rounded" aria-label="Nom du service" style="color:#000;background:#fff" />
+              <select name="department" class="w-56 p-3 border rounded text-gray-900" aria-label="Sélectionner le département" style="background:white;color:#000;">
+                <option value="">Tous les départements</option>
+                <option value="brazzaville">Brazzaville</option>
+                <option value="pointe-noire">Pointe‑Noire</option>
+                <option value="niari">Niari</option>
+                <option value="bouenza">Bouenza</option>
+                <option value="pool">Pool</option>
+                <option value="kouilou">Kouilou</option>
+                <option value="lekoumou">Lékoumou</option>
+                <option value="plateaux">Plateaux</option>
+                <option value="cuvette">Cuvette</option>
+                <option value="cuvette-ouest">Cuvette‑Ouest</option>
+                <option value="sangha">Sangha</option>
+                <option value="likouala">Likouala</option>
+              </select>
+              <button class="bg-yellow-500 text-white px-5 py-3 rounded">Rechercher</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="container mx-auto px-4 py-12">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-yellow-50 border border-yellow-100 p-6 rounded shadow text-center card-raise">
+          <div class="h-1 w-16 rounded-full mx-auto mb-3" style="background:#2bff00"></div>
+          <h3 class="font-bold mb-2 text-yellow-700">Rapide & efficace</h3>
+          <p class="text-yellow-600">Publiez ou trouvez un service rapidement — interface simple, résultats concrets.</p>
+        </div>
+        <div class="bg-emerald-50 border border-emerald-100 p-6 rounded shadow text-center card-raise">
+          <div class="h-1 w-16 rounded-full mx-auto mb-3" style="background:#fbff0f"></div>
+          <h3 class="font-bold mb-2 text-emerald-700">Prestataires vérifiés</h3>
+          <p class="text-emerald-600">Des profils clairs et un contact direct pour choisir en toute confiance.</p>
+        </div>
+        <div class="bg-indigo-50 border border-indigo-100 p-6 rounded shadow text-center card-raise">
+          <div class="h-1 w-16 rounded-full mx-auto mb-3" style="background:#ff0000"></div>
+          <h3 class="font-bold mb-2 text-indigo-700">Présence locale</h3>
+          <p class="text-indigo-600">Une plateforme adaptée aux besoins et aux réalités du Congo Brazzaville.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services preview -->
+    <section class="container mx-auto px-4 py-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">Services</h2>
+        <a href="services.html" class="text-yellow-600">Voir tout</a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded shadow text-center col-span-3">
+          <p class="text-gray-600">Aucun service d'exemple n'est affiché pour le moment. Indiquez le service que vous souhaitez ajouter et je l'intégrerai.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (centralisé et pro) -->
+  <footer class="bg-white border-t mt-8">
+    <div class="container mx-auto px-4 py-8 text-center">
+      <img src="logo.png" alt="logo" class="h-10 mx-auto mb-3">
+      <p class="text-gray-700 text-sm mb-4">© Congo Jobs Community — Plateforme locale pour l'emploi et les services.</p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-4">
+        <a href="services.html" class="text-gray-700 hover:text-yellow-600">Services</a>
+        <a href="post.html" class="text-gray-700 hover:text-yellow-600">Publier une annonce</a>
+        <a href="about.html" class="text-gray-700 hover:text-yellow-600">À propos</a>
+        <a href="contact.html" class="text-gray-700 hover:text-yellow-600">Contact</a>
+      </div>
+
+  <p class="text-sm text-gray-600 mb-1">contact@congojobscommunity.local</p>
+      <p class="text-sm text-gray-600">Brazzaville, Congo Brazzaville</p>
+    </div>
+  </footer>
+
+  <script>
+    // menu mobile animé: on joue sur la hauteur maximale et l'opacité
+    function toggleMenu(){
+      const m = document.getElementById('menu');
+      if(!m) return;
+      const open = m.classList.toggle('open');
+      m.setAttribute('aria-hidden', String(!open));
+      // accessible: focus sur premier lien quand ouvert
+      if(open){
+        const first = m.querySelector('a');
+        if(first) first.focus();
+      }
+    }
+
+    // Fermer le menu si on clique en dehors ou appuie sur Échap
+    (function(){
+      const menu = document.getElementById('menu');
+      const menuBtn = document.querySelector('button[aria-label="menu"]');
+      if(!menu) return;
+
+      // fermer en cliquant en dehors
+      document.addEventListener('click', function(e){
+        const target = e.target;
+        if(!menu.classList.contains('open')) return;
+        if(target.closest('#menu')) return; // clique dans le menu
+        if(target.closest('button[aria-label="menu"]')) return; // clique sur bouton menu
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden','true');
+      });
+
+      // fermer quand on clique sur un lien dans le menu
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=>{
+        menu.classList.remove('open');
+        menu.setAttribute('aria-hidden','true');
+      }));
+
+      // Échap pour fermer
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape' && menu.classList.contains('open')){
+          menu.classList.remove('open');
+          menu.setAttribute('aria-hidden','true');
+        }
+      });
+
+      // fermer au redimensionnement si on passe en desktop
+      window.addEventListener('resize', function(){
+        if(window.innerWidth >= 768 && menu.classList.contains('open')){
+          menu.classList.remove('open');
+          menu.setAttribute('aria-hidden','true');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

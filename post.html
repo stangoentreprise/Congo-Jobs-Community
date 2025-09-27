@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Publier un service — Congo Jobs Community</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <header class="bg-white border-b shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center space-x-3">
+        <img src="logo.png" alt="Logo Congo Jobs" class="h-10 w-10 object-contain">
+        <div>
+          <div class="font-bold text-lg">Congo Jobs Community</div>
+          <div class="text-xs text-gray-500">Prestataires locaux & services</div>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="index.html" class="text-gray-700 hover:text-yellow-600">Accueil</a>
+        <a href="services.html" class="text-gray-700 hover:text-yellow-600">Services</a>
+        <a href="post.html" class="text-gray-700 hover:text-yellow-600">Publier</a>
+        <a href="about.html" class="text-gray-700 hover:text-yellow-600">À propos</a>
+        <a href="contact.html" class="text-gray-700 hover:text-yellow-600">Contact</a>
+      </div>
+
+      <div class="md:hidden">
+        <button aria-label="menu" onclick="toggleMenu()" class="p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <nav id="menu" class="md:hidden bg-white border-t overflow-hidden" aria-hidden="true">
+      <div class="px-4 py-3 space-y-2 menu-inner">
+        <a href="index.html" class="block">Accueil</a>
+        <a href="services.html" class="block">Services</a>
+        <a href="post.html" class="block">Publier</a>
+        <a href="about.html" class="block">À propos</a>
+        <a href="contact.html" class="block">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="bg-cover bg-center" style="background-image: url('image_fond.png')">
+    <div class="bg-black bg-opacity-40">
+      <div class="container mx-auto px-4 py-16 text-white text-center">
+        <h1 class="text-3xl font-extrabold">Publier une annonce</h1>
+        <p class="mt-2 text-gray-200">Publiez rapidement un service en indiquant votre téléphone et département.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-4 py-8">
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+      <!-- Form -->
+      <form id="postForm" class="bg-white p-6 rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Publier un service</h2>
+
+        <label class="block mb-3">
+          <span class="text-sm font-medium">Titre</span>
+          <input id="title" type="text" class="w-full p-3 border rounded mt-1" placeholder="Ex: Électricien - installation éclairage" required maxlength="100">
+        </label>
+
+        <label class="block mb-3">
+          <span class="text-sm font-medium">Description</span>
+          <textarea id="description" class="w-full p-3 border rounded mt-1" rows="4" placeholder="Description courte du service, tarifs et modalités" required maxlength="800"></textarea>
+        </label>
+
+        <div class="grid md:grid-cols-2 gap-3">
+          <label class="block mb-3">
+            <span class="text-sm font-medium">Prix (optionnel)</span>
+            <input id="price" type="text" class="w-full p-3 border rounded mt-1" placeholder="Ex: 20 000 XAF / jour">
+          </label>
+
+          <label class="block mb-3">
+            <span class="text-sm font-medium">Téléphone public</span>
+            <input id="contact" type="text" class="w-full p-3 border rounded mt-1" placeholder="Ex: +242 06 XX XX XX" required>
+          </label>
+        </div>
+
+        <label class="block mb-3">
+          <span class="text-sm font-medium">Département</span>
+          <select id="department" class="w-full p-3 border rounded mt-1 text-gray-900" style="background:white;color:#000;">
+            <option value="">Tous les départements</option>
+            <option value="brazzaville">Brazzaville</option>
+            <option value="pointe-noire">Pointe‑Noire</option>
+            <option value="niari">Niari</option>
+            <option value="bouenza">Bouenza</option>
+            <option value="pool">Pool</option>
+            <option value="kouilou">Kouilou</option>
+            <option value="lekoumou">Lékoumou</option>
+            <option value="plateaux">Plateaux</option>
+            <option value="cuvette">Cuvette</option>
+            <option value="cuvette-ouest">Cuvette‑Ouest</option>
+            <option value="sangha">Sangha</option>
+            <option value="likouala">Likouala</option>
+          </select>
+        </label>
+
+        <label class="block mb-3">
+          <span class="text-sm font-medium">Image (URL ou nom de fichier)</span>
+          <input id="image" type="text" class="w-full p-3 border rounded mt-1" placeholder="laisser vide si pas d'image">
+        </label>
+
+        <div class="flex items-center justify-between mt-4">
+          <small class="text-sm text-gray-500">Les champs marqués * sont obligatoires.</small>
+          <div>
+            <button type="button" id="previewBtn" class="mr-2 bg-white border px-4 py-2 rounded">Aperçu</button>
+            <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded">Publier</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Live preview (fiche) -->
+      <div class="card-raise bg-white p-6 rounded shadow">
+        <h3 class="text-lg font-semibold mb-3">Aperçu de l'annonce</h3>
+        <div id="previewCard" class="space-y-3">
+          <div id="previewImageWrap" class="w-full h-40 bg-gray-100 rounded overflow-hidden flex items-center justify-center">
+            <img id="previewImage" src="image_fond.png" alt="Aperçu image" class="object-cover w-full h-full" />
+          </div>
+          <div>
+            <div id="previewDepartment" class="text-sm text-gray-500">—</div>
+            <h4 id="previewTitle" class="text-xl font-bold">Titre de l'annonce</h4>
+            <p id="previewDescription" class="text-gray-700">Description courte...</p>
+          </div>
+          <div class="flex items-center justify-between text-sm text-gray-700">
+            <div id="previewPrice">—</div>
+            <div id="previewContact" class="font-medium">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- toast confirmation -->
+      <div id="toast" class="fixed bottom-6 right-6 hidden bg-green-500 text-white px-4 py-2 rounded shadow">Annonce publiée</div>
+    </div>
+
+    <script>
+      // Utils
+      function showToast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.remove('hidden'); setTimeout(()=> t.classList.add('hidden'), 3000); }
+      function validatePhone(p){ if(!p) return false; const digits = p.replace(/[^0-9]/g,''); return digits.length >= 8 && digits.length <= 15; }
+      function saveService(s){ try{ const raw = localStorage.getItem('congo_services'); const arr = raw? JSON.parse(raw) : []; arr.unshift(s); localStorage.setItem('congo_services', JSON.stringify(arr)); }catch(e){ console.error(e) }}
+
+      // Live preview update
+      function updatePreview(){
+        const title = document.getElementById('title').value.trim();
+        const desc = document.getElementById('description').value.trim();
+        const price = document.getElementById('price').value.trim();
+        const contact = document.getElementById('contact').value.trim();
+        const deptSel = document.getElementById('department');
+        const department = deptSel && deptSel.value ? deptSel.options[deptSel.selectedIndex].text : '—';
+        const image = document.getElementById('image').value.trim();
+
+        document.getElementById('previewTitle').textContent = title || 'Titre de l\'annonce';
+        document.getElementById('previewDescription').textContent = desc || 'Description courte...';
+        document.getElementById('previewPrice').textContent = price ? price : 'Prix non indiqué';
+        document.getElementById('previewContact').textContent = contact || '—';
+        document.getElementById('previewDepartment').textContent = department || '—';
+
+        const imgEl = document.getElementById('previewImage');
+        if(image){ imgEl.src = image; imgEl.onerror = ()=> { imgEl.src = 'image_fond.png'; }; }
+        else { imgEl.src = 'image_fond.png'; }
+      }
+
+      // Attach events
+      ['title','description','price','contact','department','image'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(!el) return;
+        el.addEventListener('input', updatePreview);
+        el.addEventListener('change', updatePreview);
+      });
+
+      document.getElementById('previewBtn').addEventListener('click', function(){ updatePreview(); window.scrollTo({ top: document.getElementById('previewCard').offsetTop - 80, behavior: 'smooth' }); });
+
+      document.getElementById('postForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        const s = {
+          title: document.getElementById('title').value.trim(),
+          description: document.getElementById('description').value.trim(),
+          price: document.getElementById('price').value.trim(),
+          contact: document.getElementById('contact').value.trim(),
+          department: document.getElementById('department').value,
+          image: document.getElementById('image').value.trim(),
+          createdAt: new Date().toISOString()
+        };
+        if(!s.title || !s.description){ alert('Veuillez renseigner le titre et la description.'); return; }
+        if(!validatePhone(s.contact)){ alert('Numéro de téléphone invalide — entrez au moins 8 chiffres.'); return; }
+        saveService(s);
+        showToast('Annonce publiée — redirection...');
+        setTimeout(()=>{ const q = encodeURIComponent(s.title); const dep = encodeURIComponent(s.department); window.location.href = `services.html?q=${q}&department=${dep}`; }, 900);
+      });
+
+      // Init preview on load
+      document.addEventListener('DOMContentLoaded', updatePreview);
+    </script>
+  </main>
+
+  <!-- Footer (centralisé et pro) -->
+  <footer class="bg-white border-t mt-8">
+    <div class="container mx-auto px-4 py-8 text-center">
+      <img src="logo.png" alt="logo" class="h-10 mx-auto mb-3">
+      <p class="text-gray-700 text-sm mb-4">© Congo Jobs Community — Plateforme locale pour l'emploi et les services.</p>
+
+      <div class="flex flex-wrap justify-center gap-4 mb-4">
+        <a href="services.html" class="text-gray-700 hover:text-yellow-600">Services</a>
+        <a href="post.html" class="text-gray-700 hover:text-yellow-600">Publier une annonce</a>
+        <a href="about.html" class="text-gray-700 hover:text-yellow-600">À propos</a>
+        <a href="contact.html" class="text-gray-700 hover:text-yellow-600">Contact</a>
+      </div>
+
+  <p class="text-sm text-gray-600 mb-1">contact@congojobscommunity.local</p>
+      <p class="text-sm text-gray-600">Brazzaville, Congo Brazzaville</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu(){
+      const m = document.getElementById('menu'); if(!m) return; const open = m.classList.toggle('open'); m.setAttribute('aria-hidden', String(!open)); if(open){ const first = m.querySelector('a'); if(first) first.focus(); }
+    }
+    (function(){ const menu = document.getElementById('menu'); if(!menu) return; document.addEventListener('click', function(e){ const t=e.target; if(!menu.classList.contains('open')) return; if(t.closest('#menu')) return; if(t.closest('button[aria-label="menu"]')) return; menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); }); document.addEventListener('keydown', function(e){ if(e.key==='Escape' && menu.classList.contains('open')){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } }); })();
+  </script>
+</body>
+</html>
